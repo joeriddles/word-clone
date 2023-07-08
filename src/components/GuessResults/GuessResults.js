@@ -3,9 +3,9 @@ import React from "react";
 function GuessResults({ guesses }) {
   return (
     <div className="guess-results">
-      {guesses.map(({ word, key }) => (
+      {guesses.map(({ value, key }) => (
         <p key={key} className="guess">
-          {word}
+          {value}
         </p>
       ))}
     </div>

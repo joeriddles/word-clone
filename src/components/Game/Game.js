@@ -16,7 +16,7 @@ function Game() {
 
   function addGuess(guess) {
     const item = {
-      word: guess,
+      value: guess,
       key: crypto.randomUUID(),
     };
     setGuesses([...guesses, item]);
