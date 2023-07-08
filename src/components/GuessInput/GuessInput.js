@@ -1,6 +1,6 @@
 import React from "react";
 
-function Guess({ addGuess }) {
+function GuessInput({ addGuess }) {
   const [guess, setGuess] = React.useState("");
 
   function onFormSubmit(event) {
@@ -27,4 +27,4 @@ function Guess({ addGuess }) {
   );
 }
 
-export default Guess;
+export default GuessInput;
