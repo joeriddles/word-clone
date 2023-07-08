@@ -16,7 +16,9 @@ const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
 console.info({ answer });
 
-const DEFAULT_GUESS = range(NUM_OF_LETTERS_IN_GUESS).map(() => "");
+const DEFAULT_GUESS = range(NUM_OF_LETTERS_IN_GUESS)
+  .map(() => " ")
+  .join("");
 
 function Game() {
   const defaultGuesses = range(NUM_OF_GUESSES_ALLOWED).map(() => {
@@ -26,8 +28,6 @@ function Game() {
   const [guesses, setGuesses] = React.useState(defaultGuesses);
 
   function addGuess(guess) {
-    guess = guess.split("");
-
     const firstBlankGuessIndex = guesses.findIndex(
       ({ guess }) => guess === DEFAULT_GUESS
     );
