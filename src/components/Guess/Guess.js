@@ -15,6 +15,7 @@ function Guess() {
       <input
         id="guess"
         type="text"
+        required
         minLength={5}
         maxLength={5}
         pattern="\w{5}" // minLength is wonky, use pattern too
