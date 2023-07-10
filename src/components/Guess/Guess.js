@@ -1,7 +1,6 @@
 import React from "react";
 
 function Guess({ guess }) {
-  console.log(guess);
   return (
     <p className="guess">
       {guess.map(({ letter, status }, index) => (
