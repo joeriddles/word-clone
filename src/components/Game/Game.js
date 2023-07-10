@@ -4,9 +4,9 @@ import {
   NUM_OF_GUESSES_ALLOWED,
   NUM_OF_LETTERS_IN_GUESS,
 } from "../../constants";
-import { sample } from "../../utils";
 import { WORDS } from "../../data";
-import { range } from "../../utils";
+import { checkGuess } from "../../game-helpers";
+import { range, sample } from "../../utils";
 
 import GuessInput from "../GuessInput";
 import GuessResults from "../GuessResults";
@@ -16,31 +16,21 @@ const answer = sample(WORDS);
 // To make debugging easier, we'll log the solution in the console.
 console.info({ answer });
 
-const DEFAULT_GUESS = range(NUM_OF_LETTERS_IN_GUESS)
-  .map(() => " ")
-  .join("");
+const DEFAULT_GUESS = range(NUM_OF_LETTERS_IN_GUESS).map(() => {
+  return { letter: " ", status: undefined };
+});
 
 function Game() {
-  const defaultGuesses = range(NUM_OF_GUESSES_ALLOWED).map(() => {
-    return { key: crypto.randomUUID(), guess: DEFAULT_GUESS };
-  });
-
+  const defaultGuesses = range(NUM_OF_GUESSES_ALLOWED).map(() => DEFAULT_GUESS);
   const [guesses, setGuesses] = React.useState(defaultGuesses);
 
   function addGuess(guess) {
-    const firstBlankGuessIndex = guesses.findIndex(
-      ({ guess }) => guess === DEFAULT_GUESS
-    );
-    const blankGuessItem = guesses[firstBlankGuessIndex];
-
-    const newGuess = {
-      ...blankGuessItem,
-      guess,
-    };
-
     const newGuesses = [...guesses];
-    newGuesses[firstBlankGuessIndex] = newGuess;
-
+    const guessResult = checkGuess(guess, answer);
+    const firstBlankGuessIndex = guesses.findIndex((guess) =>
+      guess.every(({ letter }) => letter === " ")
+    );
+    newGuesses[firstBlankGuessIndex] = guessResult;
     setGuesses(newGuesses);
   }
 

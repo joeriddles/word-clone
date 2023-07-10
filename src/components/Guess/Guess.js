@@ -1,12 +1,11 @@
 import React from "react";
 
 function Guess({ guess }) {
-  const letters = guess.split("");
-
+  console.log(guess);
   return (
     <p className="guess">
-      {letters.map((letter, index) => (
-        <span key={index} className="cell">
+      {guess.map(({ letter, status }, index) => (
+        <span key={index} className={status ? `cell ${status}` : "cell"}>
           {letter}
         </span>
       ))}
